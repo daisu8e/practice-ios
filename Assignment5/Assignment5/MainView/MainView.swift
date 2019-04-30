@@ -5,6 +5,7 @@ class MainView: UIView {
   var ctrl: MainViewController!
   var billAmountLabel: UILabel!
   var billAmountField: UITextField!
+  var calculateTipButton: UIButton!
 
   required init?(coder aDecoder: NSCoder) {
     super.init(coder: aDecoder)
@@ -13,10 +14,11 @@ class MainView: UIView {
   init(_ ctrl: MainViewController!) {
     super.init(frame: CGRect.zero)
 
-    self.backgroundColor = .white
     self.ctrl = ctrl
     self.billAmountLabel = createBillAmountLabel()
     self.billAmountField = createBillAmountField()
+    self.calculateTipButton = createCalculateTipButton()
+    self.backgroundColor = .white
 
     addSubviews()
     constraint()
@@ -36,9 +38,23 @@ class MainView: UIView {
     return it
   }
 
+  private func createCalculateTipButton() -> UIButton {
+    let it = UIButton(type: .system)
+    it.translatesAutoresizingMaskIntoConstraints = false
+    it.setTitle("Calculate Tip", for: .normal)
+    it.addTarget(self, action: #selector(clickCalculateTipButton), for: .touchUpInside)
+    return it
+  }
+
+  @objc private func clickCalculateTipButton() {
+    let amount = Double(billAmountField.text!)!
+    print(amount + amount * 0.15)
+  }
+
   private func addSubviews() {
     addSubview(billAmountLabel)
     addSubview(billAmountField)
+    addSubview(calculateTipButton)
   }
 
   private func constraint() {
@@ -48,6 +64,9 @@ class MainView: UIView {
 
       billAmountField.centerXAnchor.constraint(equalTo: centerXAnchor),
       billAmountField.topAnchor.constraint(equalTo: billAmountLabel.bottomAnchor, constant: 16),
+
+      calculateTipButton.centerXAnchor.constraint(equalTo: centerXAnchor),
+      calculateTipButton.topAnchor.constraint(equalTo: billAmountField.bottomAnchor, constant: 16),
     ])
   }
 
