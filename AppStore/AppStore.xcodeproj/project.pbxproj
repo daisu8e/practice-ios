@@ -11,20 +11,26 @@
 		19DDE134BC48F372CEDFE907 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19DDE4C07D73E423310D06D4 /* MainTabBarController.swift */; };
 		19DDE1A0AAEB5417F252D6E8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 19DDE5D0C5728B531D95BF4E /* Assets.xcassets */; };
 		19DDE4F8125E58981208CD76 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 19DDE6C57CAF134008BC06E8 /* Main.storyboard */; };
+		19DDE538D2E46840D69BA9C8 /* Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19DDE10B8803AEFD466E3A6C /* Search.swift */; };
+		19DDE718990FBE49F0CF4BE6 /* SearchCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19DDE34A3BCF94AD5BC391B2 /* SearchCollectionViewCell.swift */; };
 		19DDE7B6A993EF02D08997D4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19DDE91B61F66FFED7457C30 /* AppDelegate.swift */; };
+		19DDEAE701AA14E7CEBCFF24 /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19DDEC44896B62B877AB7940 /* App.swift */; };
 		19DDEB3AE1C6C62552795087 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 19DDEE0D9F93D4578A87B92B /* LaunchScreen.storyboard */; };
 		19DDED7B3D61F128F683F97C /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19DDE4641265806605D5E9B9 /* SearchViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		19DDE10B8803AEFD466E3A6C /* Search.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Search.swift; sourceTree = "<group>"; };
 		19DDE10D0D34AA4A21701176 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		19DDE1F310BF62AA4FB6ED14 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		19DDE34A3BCF94AD5BC391B2 /* SearchCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchCollectionViewCell.swift; sourceTree = "<group>"; };
 		19DDE4641265806605D5E9B9 /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		19DDE4C07D73E423310D06D4 /* MainTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		19DDE5D0C5728B531D95BF4E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		19DDE91B61F66FFED7457C30 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		19DDEBF767BD5C8DBCABAD9F /* AppStore.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AppStore.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		19DDEC0A5E5AE8CFBE5E2DCA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.info; path = Info.plist; sourceTree = "<group>"; };
+		19DDEC44896B62B877AB7940 /* App.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
 		19DDEE4CB36A23D584A78B7E /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -48,8 +54,27 @@
 				19DDE91B61F66FFED7457C30 /* AppDelegate.swift */,
 				19DDE6C57CAF134008BC06E8 /* Main.storyboard */,
 				19DDECB2194DD316698DA395 /* Controllers */,
+				19DDE5A84851952569A08B7D /* Views */,
+				19DDE634E122AE8D10D81B93 /* Models */,
 			);
 			path = AppStore;
+			sourceTree = "<group>";
+		};
+		19DDE5A84851952569A08B7D /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				19DDE34A3BCF94AD5BC391B2 /* SearchCollectionViewCell.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		19DDE634E122AE8D10D81B93 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				19DDE10B8803AEFD466E3A6C /* Search.swift */,
+				19DDEC44896B62B877AB7940 /* App.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		19DDE6EAF632B8AD0492979A /* Products */ = {
@@ -147,6 +172,9 @@
 				19DDE134BC48F372CEDFE907 /* MainTabBarController.swift in Sources */,
 				19DDED7B3D61F128F683F97C /* SearchViewController.swift in Sources */,
 				19DDE0924E21D7E79BBB70A3 /* ViewController.swift in Sources */,
+				19DDE718990FBE49F0CF4BE6 /* SearchCollectionViewCell.swift in Sources */,
+				19DDE538D2E46840D69BA9C8 /* Search.swift in Sources */,
+				19DDEAE701AA14E7CEBCFF24 /* App.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
