@@ -12,6 +12,17 @@ class MainView: UIView {
   var tipPercentageField: UITextField!
   var calculateTipButton: UIButton!
   var tipAmountLabel: UILabel!
+  var layout: UIStackView!
+  var closeKeyboardButton: UIButton!
+
+  var animationConstraints: [NSLayoutConstraint] = [] {
+    willSet {
+      NSLayoutConstraint.deactivate(animationConstraints)
+    }
+    didSet {
+      NSLayoutConstraint.activate(animationConstraints)
+    }
+  }
 
   required init?(coder aDecoder: NSCoder) {
     super.init(coder: aDecoder)
@@ -27,10 +38,28 @@ class MainView: UIView {
     self.tipPercentageField = createTipPercentageField()
     self.calculateTipButton = createCalculateTipButton()
     self.tipAmountLabel = createTipAmountLabel()
+    self.layout = createLayout()
+    self.closeKeyboardButton = createCloseKeyboardButton()
     self.backgroundColor = .white
 
     addSubviews()
     constraint()
+  }
+
+  func enableKeyboardLayout(keyboard: CGRect, animation: TimeInterval) {
+    closeKeyboardButton.isHidden = false
+    UIView.animate(withDuration: animation, delay: 0, options: .curveLinear, animations: {
+      self.constraintKeyboardLayout(with: keyboard)
+      self.layoutIfNeeded()
+    })
+  }
+
+  func disableKeyboardLayout(keyboard: CGRect, animation: TimeInterval) {
+    closeKeyboardButton.isHidden = true
+    UIView.animate(withDuration: animation, delay: 0, options: .curveLinear, animations: {
+      self.constraintDefaultLayout()
+      self.layoutIfNeeded()
+    })
   }
 
   private func createBillAmountLabel() -> UILabel {
@@ -44,6 +73,7 @@ class MainView: UIView {
     let it = UITextField()
     it.translatesAutoresizingMaskIntoConstraints = false
     it.placeholder = "Enter Bill Amount"
+    it.keyboardType = .decimalPad
     return it
   }
 
@@ -58,6 +88,7 @@ class MainView: UIView {
     let it = UITextField()
     it.translatesAutoresizingMaskIntoConstraints = false
     it.placeholder = "Enter Tip Percentage"
+    it.keyboardType = .decimalPad
     it.text = String(defaultTipPercentage)
     return it
   }
@@ -77,41 +108,64 @@ class MainView: UIView {
     return it
   }
 
+  private func createLayout() -> UIStackView {
+    let it = UIStackView()
+    it.translatesAutoresizingMaskIntoConstraints = false
+    it.addArrangedSubview(billAmountLabel)
+    it.addArrangedSubview(billAmountField)
+    it.addArrangedSubview(tipPercentageLabel)
+    it.addArrangedSubview(tipPercentageField)
+    it.addArrangedSubview(calculateTipButton)
+    it.addArrangedSubview(tipAmountLabel)
+    it.axis = .vertical
+    it.distribution = .equalSpacing
+    it.spacing = 16
+    return it
+  }
+
+  private func createCloseKeyboardButton() -> UIButton {
+    let it = UIButton(type: .system)
+    it.translatesAutoresizingMaskIntoConstraints = false
+    it.setTitle("Close", for: .normal)
+    it.addTarget(self, action: #selector(clickCloseKeyboardButton), for: .touchUpInside)
+    it.isHidden = true
+    return it
+  }
+
   @objc private func clickCalculateTipButton() {
     let amount = Double(billAmountField.text!)!
     let percentage = Double(tipPercentageField.text!)!
     tipAmountLabel.text = String(amount + amount * percentage / 100)
   }
 
+  @objc private func clickCloseKeyboardButton() {
+    endEditing(true)
+  }
+
   private func addSubviews() {
-    addSubview(billAmountLabel)
-    addSubview(billAmountField)
-    addSubview(tipPercentageLabel)
-    addSubview(tipPercentageField)
-    addSubview(calculateTipButton)
-    addSubview(tipAmountLabel)
+    addSubview(layout)
+    addSubview(closeKeyboardButton)
   }
 
   private func constraint() {
     NSLayoutConstraint.activate([
-      billAmountLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
-      billAmountLabel.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 16),
-
-      billAmountField.centerXAnchor.constraint(equalTo: centerXAnchor),
-      billAmountField.topAnchor.constraint(equalTo: billAmountLabel.bottomAnchor, constant: 16),
-
-      tipPercentageLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
-      tipPercentageLabel.topAnchor.constraint(equalTo: billAmountField.bottomAnchor, constant: 16),
-
-      tipPercentageField.centerXAnchor.constraint(equalTo: centerXAnchor),
-      tipPercentageField.topAnchor.constraint(equalTo: tipPercentageLabel.bottomAnchor, constant: 16),
-
-      calculateTipButton.centerXAnchor.constraint(equalTo: centerXAnchor),
-      calculateTipButton.topAnchor.constraint(equalTo: tipPercentageField.bottomAnchor, constant: 16),
-
-      tipAmountLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
-      tipAmountLabel.topAnchor.constraint(equalTo: calculateTipButton.bottomAnchor, constant: 16),
+      layout.centerXAnchor.constraint(equalTo: centerXAnchor),
+      closeKeyboardButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
     ])
+    constraintDefaultLayout()
   }
 
+  private func constraintDefaultLayout() {
+    animationConstraints = [
+      layout.centerYAnchor.constraint(equalTo: centerYAnchor),
+      closeKeyboardButton.bottomAnchor.constraint(equalTo: bottomAnchor),
+    ]
+  }
+
+  private func constraintKeyboardLayout(with keyboard: CGRect) {
+    animationConstraints = [
+      layout.centerYAnchor.constraint(equalTo: centerYAnchor, constant: -(keyboard.height / 2)),
+      closeKeyboardButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -keyboard.height),
+    ]
+  }
 }
