@@ -2,8 +2,6 @@ import UIKit
 
 class MainView: UIView {
 
-  let defaultTipPercentage = 15
-
   var ctrl: MainViewController!
 
   var billAmountLabel: UILabel!
@@ -25,10 +23,6 @@ class MainView: UIView {
     }
   }
 
-  required init?(coder aDecoder: NSCoder) {
-    super.init(coder: aDecoder)
-  }
-
   init(_ ctrl: MainViewController!) {
     super.init(frame: CGRect.zero)
 
@@ -48,7 +42,23 @@ class MainView: UIView {
     constraint()
   }
 
-  func enableKeyboardLayout(keyboard: CGRect, animation: TimeInterval) {
+  required init?(coder aDecoder: NSCoder) {
+    super.init(coder: aDecoder)
+  }
+
+  func renderTipPercentageField() {
+    tipPercentageField.text = String(ctrl.model.tipPercentage)
+  }
+
+  func renderTipPercentageSlider() {
+    tipPercentageSlider.value = Float(ctrl.model.tipPercentage)
+  }
+
+  func renderTipAmountField() {
+    tipAmountField.text = String(ctrl.model.tipAmount)
+  }
+
+  func renderKeyboardLayout(keyboard: CGRect, animation: TimeInterval) {
     closeKeyboardButton.isHidden = false
     UIView.animate(withDuration: animation, delay: 0, options: .curveLinear, animations: {
       self.constraintKeyboardLayout(with: keyboard)
@@ -56,7 +66,7 @@ class MainView: UIView {
     })
   }
 
-  func disableKeyboardLayout(keyboard: CGRect, animation: TimeInterval) {
+  func renderDefaultLayout(keyboard: CGRect, animation: TimeInterval) {
     closeKeyboardButton.isHidden = true
     UIView.animate(withDuration: animation, delay: 0, options: .curveLinear, animations: {
       self.constraintDefaultLayout()
@@ -76,7 +86,7 @@ class MainView: UIView {
     it.translatesAutoresizingMaskIntoConstraints = false
     it.placeholder = "Enter Bill Amount"
     it.keyboardType = .decimalPad
-    it.addTarget(self, action: #selector(changeBillAmountField), for: .editingChanged)
+    it.addTarget(ctrl, action: #selector(MainViewController.whenBillAmountFieldChanged), for: .editingChanged)
     return it
   }
 
@@ -92,8 +102,8 @@ class MainView: UIView {
     it.translatesAutoresizingMaskIntoConstraints = false
     it.placeholder = "Enter Tip Percentage"
     it.keyboardType = .decimalPad
-    it.text = String(defaultTipPercentage)
-    it.addTarget(self, action: #selector(changeTipPercentageField), for: .editingChanged)
+    it.text = String(ctrl.model.tipPercentage)
+    it.addTarget(ctrl, action: #selector(MainViewController.whenTipPercentageFieldChanged), for: .editingChanged)
     return it
   }
 
@@ -102,8 +112,8 @@ class MainView: UIView {
     it.translatesAutoresizingMaskIntoConstraints = false
     it.minimumValue = 0
     it.maximumValue = 100
-    it.value = Float(defaultTipPercentage)
-    it.addTarget(self, action: #selector(changeTipPercentageSlider), for: .valueChanged)
+    it.value = Float(ctrl.model.tipPercentage)
+    it.addTarget(ctrl, action: #selector(MainViewController.whenTipPercentageSliderChanged), for: .valueChanged)
     return it
   }
 
@@ -141,36 +151,9 @@ class MainView: UIView {
     let it = UIButton(type: .system)
     it.translatesAutoresizingMaskIntoConstraints = false
     it.setTitle("Close", for: .normal)
-    it.addTarget(self, action: #selector(clickCloseKeyboardButton), for: .touchUpInside)
+    it.addTarget(ctrl, action: #selector(MainViewController.whenCloseKeyboardButtonClicked), for: .touchUpInside)
     it.isHidden = true
     return it
-  }
-
-  @objc private func changeBillAmountField() {
-    updateTipAmount()
-  }
-
-  @objc private func clickCloseKeyboardButton() {
-    endEditing(true)
-  }
-
-  @objc private func changeTipPercentageField() {
-    let percentage = tipPercentageField.text!
-    if percentage.isEmpty { return }
-    tipPercentageSlider.value = Float(percentage)!
-    updateTipAmount()
-  }
-
-  @objc private func changeTipPercentageSlider() {
-    tipPercentageField.text = String(Int(tipPercentageSlider.value))
-    updateTipAmount()
-  }
-
-  private func updateTipAmount() {
-    let amount = billAmountField.text!
-    let percentage = tipPercentageField.text!
-    if amount.isEmpty || percentage.isEmpty { return }
-    tipAmountField.text = String(Double(amount)! * Double(percentage)! / 100)
   }
 
   private func addSubviews() {

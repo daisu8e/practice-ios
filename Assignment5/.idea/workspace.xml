@@ -21,21 +21,22 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/Assignment5/MainView/MainViewController.swift">
+        <entry file="file://$PROJECT_DIR$/Assignment5/MainView/MainViewModel.swift">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="435">
-              <caret line="29" column="24" selection-start-line="29" selection-start-column="24" selection-end-line="29" selection-end-column="24" />
+            <state relative-caret-position="255">
+              <caret line="17" column="14" selection-start-line="17" selection-start-column="14" selection-end-line="17" selection-end-column="14" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Assignment5/MainView/MainViewController.swift">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Assignment5/MainView/MainView.swift">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="158">
-              <caret line="154" column="2" selection-start-line="154" selection-start-column="2" selection-end-line="154" selection-end-column="2" />
-            </state>
-          </provider>
+          <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
     </leaf>
@@ -46,8 +47,9 @@
         <option value="$PROJECT_DIR$/Assignment5/ViewController.swift" />
         <option value="$PROJECT_DIR$/Assignment5/AppDelegate.swift" />
         <option value="$PROJECT_DIR$/Assignment5/Controllers/MainViewController.swift" />
-        <option value="$PROJECT_DIR$/Assignment5/MainView/MainViewController.swift" />
         <option value="$PROJECT_DIR$/Assignment5/MainView/MainView.swift" />
+        <option value="$PROJECT_DIR$/Assignment5/MainView/MainViewModel.swift" />
+        <option value="$PROJECT_DIR$/Assignment5/MainView/MainViewController.swift" />
       </list>
     </option>
   </component>
@@ -61,7 +63,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Cidr.FilesView" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -84,6 +85,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Cidr.FilesView" />
       <pane id="Scope" />
     </panes>
   </component>
@@ -127,12 +129,12 @@
       <option name="presentableId" value="Default" />
       <updated>1556655242280</updated>
       <workItem from="1556655244227" duration="21494000" />
-      <workItem from="1556695450580" duration="1147000" />
+      <workItem from="1556695450580" duration="9851000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="22641000" />
+    <option name="totallyTimeSpent" value="31345000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="877" extended-state="6" />
@@ -209,6 +211,12 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Assignment5/MainView/MainView.swift">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assignment5/MainView/MainViewController.swift">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/Assignment5/AppDelegate.swift">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="150">
@@ -216,17 +224,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Assignment5/MainView/MainView.swift">
+    <entry file="file://$PROJECT_DIR$/Assignment5/MainView/MainViewModel.swift">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="158">
-          <caret line="154" column="2" selection-start-line="154" selection-start-column="2" selection-end-line="154" selection-end-column="2" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Assignment5/MainView/MainViewController.swift">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="435">
-          <caret line="29" column="24" selection-start-line="29" selection-start-column="24" selection-end-line="29" selection-end-column="24" />
+        <state relative-caret-position="255">
+          <caret line="17" column="14" selection-start-line="17" selection-start-column="14" selection-end-line="17" selection-end-column="14" />
         </state>
       </provider>
     </entry>
