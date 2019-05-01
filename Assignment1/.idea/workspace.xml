@@ -26,7 +26,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Assignment1/ViewController.swift">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="765">
+            <state relative-caret-position="2685">
               <caret line="179" column="6" selection-start-line="179" selection-start-column="6" selection-end-line="179" selection-end-column="6" />
             </state>
           </provider>
@@ -126,11 +126,12 @@
       <workItem from="1555533149817" duration="36941000" />
       <workItem from="1556273971146" duration="3137000" />
       <workItem from="1556666310218" duration="2164000" />
+      <workItem from="1556695450859" duration="729000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="42242000" />
+    <option name="totallyTimeSpent" value="42971000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="877" extended-state="6" />
@@ -218,7 +219,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Assignment1/ViewController.swift">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="765">
+        <state relative-caret-position="2685">
           <caret line="179" column="6" selection-start-line="179" selection-start-column="6" selection-end-line="179" selection-end-column="6" />
         </state>
       </provider>

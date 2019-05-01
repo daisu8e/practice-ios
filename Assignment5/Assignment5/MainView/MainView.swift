@@ -11,8 +11,8 @@ class MainView: UIView {
   var tipPercentageLabel: UILabel!
   var tipPercentageField: UITextField!
   var tipPercentageSlider: UISlider!
-  var calculateTipButton: UIButton!
   var tipAmountLabel: UILabel!
+  var tipAmountField: UILabel!
   var layout: UIStackView!
   var closeKeyboardButton: UIButton!
 
@@ -38,8 +38,8 @@ class MainView: UIView {
     self.tipPercentageLabel = createTipPercentageLabel()
     self.tipPercentageField = createTipPercentageField()
     self.tipPercentageSlider = createTipPercentageSlider()
-    self.calculateTipButton = createCalculateTipButton()
     self.tipAmountLabel = createTipAmountLabel()
+    self.tipAmountField = createTipAmountField()
     self.layout = createLayout()
     self.closeKeyboardButton = createCloseKeyboardButton()
     self.backgroundColor = .white
@@ -76,6 +76,7 @@ class MainView: UIView {
     it.translatesAutoresizingMaskIntoConstraints = false
     it.placeholder = "Enter Bill Amount"
     it.keyboardType = .decimalPad
+    it.addTarget(self, action: #selector(changeBillAmountField), for: .editingChanged)
     return it
   }
 
@@ -92,6 +93,7 @@ class MainView: UIView {
     it.placeholder = "Enter Tip Percentage"
     it.keyboardType = .decimalPad
     it.text = String(defaultTipPercentage)
+    it.addTarget(self, action: #selector(changeTipPercentageField), for: .editingChanged)
     return it
   }
 
@@ -105,18 +107,17 @@ class MainView: UIView {
     return it
   }
 
-  private func createCalculateTipButton() -> UIButton {
-    let it = UIButton(type: .system)
-    it.translatesAutoresizingMaskIntoConstraints = false
-    it.setTitle("Calculate Tip", for: .normal)
-    it.addTarget(self, action: #selector(clickCalculateTipButton), for: .touchUpInside)
-    return it
-  }
-
   private func createTipAmountLabel() -> UILabel {
     let it = UILabel()
     it.translatesAutoresizingMaskIntoConstraints = false
     it.text = "Tip Amount"
+    return it
+  }
+
+  private func createTipAmountField() -> UILabel {
+    let it = UILabel()
+    it.translatesAutoresizingMaskIntoConstraints = false
+    it.text = "0"
     return it
   }
 
@@ -128,8 +129,8 @@ class MainView: UIView {
     it.addArrangedSubview(tipPercentageLabel)
     it.addArrangedSubview(tipPercentageField)
     it.addArrangedSubview(tipPercentageSlider)
-    it.addArrangedSubview(calculateTipButton)
     it.addArrangedSubview(tipAmountLabel)
+    it.addArrangedSubview(tipAmountField)
     it.axis = .vertical
     it.distribution = .equalSpacing
     it.spacing = 16
@@ -145,18 +146,31 @@ class MainView: UIView {
     return it
   }
 
-  @objc private func clickCalculateTipButton() {
-    let amount = Double(billAmountField.text!)!
-    let percentage = Double(tipPercentageField.text!)!
-    tipAmountLabel.text = String(amount + amount * percentage / 100)
+  @objc private func changeBillAmountField() {
+    updateTipAmount()
   }
 
   @objc private func clickCloseKeyboardButton() {
     endEditing(true)
   }
 
+  @objc private func changeTipPercentageField() {
+    let percentage = tipPercentageField.text!
+    if percentage.isEmpty { return }
+    tipPercentageSlider.value = Float(percentage)!
+    updateTipAmount()
+  }
+
   @objc private func changeTipPercentageSlider() {
     tipPercentageField.text = String(Int(tipPercentageSlider.value))
+    updateTipAmount()
+  }
+
+  private func updateTipAmount() {
+    let amount = billAmountField.text!
+    let percentage = tipPercentageField.text!
+    if amount.isEmpty || percentage.isEmpty { return }
+    tipAmountField.text = String(Double(amount)! * Double(percentage)! / 100)
   }
 
   private func addSubviews() {
