@@ -22,6 +22,7 @@ class TodoListViewController: UITableViewController {
 //    tableView.dataSource = self
     tableView.register(TodoListCell.self, forCellReuseIdentifier: cellId)
 
+    navigationItem.title = "Todo List"
     navigationItem.rightBarButtonItem = editButtonItem
     navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(handleAddButton))
 
@@ -48,6 +49,10 @@ class TodoListViewController: UITableViewController {
     return cell
   }
 
+  override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    navigationController?.pushViewController(TodoDetailsViewController(todo: model.todoList.get(indexPath.row)), animated: true)
+  }
+
 //  override func setEditing(_ editing: Bool, animated: Bool) {
 //    super.setEditing(editing, animated: animated)
 //    tableView.setEditing(editing, animated: animated)
@@ -60,9 +65,6 @@ class TodoListViewController: UITableViewController {
 }
 
 extension TodoListViewController {
-  override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-
-  }
 
   override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
     switch editingStyle {
