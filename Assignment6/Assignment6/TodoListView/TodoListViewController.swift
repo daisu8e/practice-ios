@@ -23,7 +23,7 @@ class TodoListViewController: UITableViewController {
     tableView.register(TodoListCell.self, forCellReuseIdentifier: cellId)
 
     navigationItem.title = "Todo List"
-    navigationItem.rightBarButtonItem = editButtonItem
+    navigationItem.leftBarButtonItem = editButtonItem
     navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(handleAddButton))
 
     tableView.allowsMultipleSelectionDuringEditing = true
@@ -45,7 +45,7 @@ class TodoListViewController: UITableViewController {
 
   override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! TodoListCell
-    cell.titleLabel.text = model.todoList.get(indexPath.row).title
+    cell.render(model.todoList.get(indexPath.row))
     return cell
   }
 
@@ -53,36 +53,36 @@ class TodoListViewController: UITableViewController {
     navigationController?.pushViewController(TodoDetailsViewController(todo: model.todoList.get(indexPath.row)), animated: true)
   }
 
-//  override func setEditing(_ editing: Bool, animated: Bool) {
-//    super.setEditing(editing, animated: animated)
-//    tableView.setEditing(editing, animated: animated)
-//  }
-
-  @objc func handleAddButton() {
-    navigationController?.pushViewController(AddTodoViewController(todoList: model.todoList), animated: true)
-  }
-
-}
-
-extension TodoListViewController {
-
-  override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-    switch editingStyle {
-    case .insert:
-      break
-    case .delete:
-      break
-    default:
-      break
-    }
-  }
-
   override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-    return super.tableView(tableView, canMoveRowAt: indexPath)
+    return true
+  }
+
+  override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+    let complete = UITableViewRowAction(style: .normal, title: "Complete") { action, indexPath in
+      self.model.todoList.get(indexPath.row).complete()
+      self.tableView.reloadData()
+    }
+    complete.backgroundColor = .green
+
+//    let delete = UITableViewRowAction(style: .normal, title: "Delete") { action, indexPath in
+//      print("xxxxx")
+//    }
+//    delete.backgroundColor = .red
+
+    return [complete]
   }
 
   override func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
 
+  }
+
+  override func setEditing(_ editing: Bool, animated: Bool) {
+    super.setEditing(editing, animated: animated)
+    tableView.isEditing = editing
+  }
+
+  @objc func handleAddButton() {
+    navigationController?.pushViewController(AddTodoViewController(todoList: model.todoList), animated: true)
   }
 
 }

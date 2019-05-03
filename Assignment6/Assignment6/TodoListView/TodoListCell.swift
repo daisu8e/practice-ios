@@ -25,6 +25,11 @@ class TodoListCell: UITableViewCell {
     super.setSelected(selected, animated: animated)
   }
 
+  func render(_ todo: Todo) {
+    titleLabel.text = todo.title
+    backgroundColor = todo.isCompleted ? .gray : .white
+  }
+
   private func createTitleLabel() -> UILabel {
     let it = UILabel()
     it.translatesAutoresizingMaskIntoConstraints = false

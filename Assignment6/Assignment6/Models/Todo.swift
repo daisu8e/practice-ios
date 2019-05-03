@@ -14,4 +14,8 @@ class Todo {
     self.isCompleted = isCompleted
   }
 
+  func complete() {
+    isCompleted = true
+  }
+
 }
