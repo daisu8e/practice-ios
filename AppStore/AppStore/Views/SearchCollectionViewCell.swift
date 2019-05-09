@@ -1,4 +1,5 @@
 import UIKit
+import SDWebImage
 
 class SearchCollectionViewCell: UICollectionViewCell {
 
@@ -53,6 +54,10 @@ class SearchCollectionViewCell: UICollectionViewCell {
     let it = UIImageView()
     it.backgroundColor = .green
     it.layer.cornerRadius = 7
+    it.clipsToBounds = true
+    it.layer.borderWidth = 0.5
+    it.layer.borderColor = UIColor(white: 0.5, alpha: 0.5)
+    it.contentMode = .scaleAspectFill
     return it
   }
 

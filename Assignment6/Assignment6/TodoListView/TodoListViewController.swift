@@ -58,18 +58,20 @@ class TodoListViewController: UITableViewController {
   }
 
   override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+
+    let delete = UITableViewRowAction(style: .normal, title: "Delete") { action, indexPath in
+      self.model.todoList.remove(indexPath.row)
+      tableView.deleteRows(at: [indexPath], with: .fade)
+    }
+    delete.backgroundColor = .red
+
     let complete = UITableViewRowAction(style: .normal, title: "Complete") { action, indexPath in
       self.model.todoList.get(indexPath.row).complete()
       self.tableView.reloadData()
     }
     complete.backgroundColor = .green
 
-//    let delete = UITableViewRowAction(style: .normal, title: "Delete") { action, indexPath in
-//      print("xxxxx")
-//    }
-//    delete.backgroundColor = .red
-
-    return [complete]
+    return [delete, complete]
   }
 
   override func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
