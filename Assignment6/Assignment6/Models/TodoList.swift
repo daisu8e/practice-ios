@@ -16,4 +16,8 @@ class TodoList {
     data.append(todo)
   }
 
+  func remove(_ index: Int) {
+    data.remove(at: index)
+  }
+
 }

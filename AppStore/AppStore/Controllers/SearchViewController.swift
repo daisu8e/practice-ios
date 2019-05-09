@@ -1,8 +1,10 @@
 import UIKit
 
-class SearchViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
+class SearchViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout, UISearchBarDelegate {
 
   private let cellId = "resultCell"
+  private var searchResults = [App]()
+  private let searchController = UISearchController(searchResultsController: nil)
 
   init() {
     super.init(collectionViewLayout: UICollectionViewFlowLayout())
@@ -18,7 +20,28 @@ class SearchViewController: UICollectionViewController, UICollectionViewDelegate
     collectionView.backgroundColor = .white
     collectionView.register(SearchCollectionViewCell.self, forCellWithReuseIdentifier: cellId)
 
-    fetchSearchResults()
+    setupSearchBar()
+  }
+
+  private func setupSearchBar() {
+    definesPresentationContext = true
+    navigationItem.searchController = self.searchController
+    navigationItem.hidesSearchBarWhenScrolling = false
+    searchController.searchBar.delegate = self
+  }
+
+  var timer: Timer?
+
+  func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+    timer?.invalidate()
+    timer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false, block: {
+      NetworkService.singleton.fetchSearchResults(searchTerm: searchText) { results, err in
+        self.searchResults = results
+        DispatchQueue.main.async {
+          self.collectionView.reloadData()
+        }
+      }
+    })
   }
 
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -33,31 +56,6 @@ class SearchViewController: UICollectionViewController, UICollectionViewDelegate
     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! SearchCollectionViewCell
 //    cell.contentView.backgroundColor = .red
     return cell
-  }
-
-  private func fetchSearchResults() {
-    let urlString = "https://itunes.apple.com/search?term=instagram&country=JP&entity=software"
-    guard let url = URL(string: urlString) else { return }
-    URLSession.shared.dataTask(with: url) { data, response, error in
-      if let err = error {
-        print("Failed to fetch apps: ", err)
-        return
-      }
-
-      guard let data = data else { return }
-
-      do {
-
-        let json = try JSONDecoder().decode(Search.self, from: data)
-        json.results.forEach {
-          print($0.trackName, $0.primaryGenreName)
-        }
-
-      } catch {
-        print("Failed to decode JSON: ", error)
-      }
-
-    }.resume()
   }
 
 }
