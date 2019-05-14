@@ -12,6 +12,7 @@
 		19DDE6C07DFCCE8816BA62FC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 19DDEE0E54279F7F95F54649 /* LaunchScreen.storyboard */; };
 		19DDE83B1AFDE60D02DE6B4D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19DDEB4A329D59958E4BDCD2 /* ViewController.swift */; };
 		19DDE9730F1EE009DB63EDE9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 19DDE3126887430EBAFB18EC /* Assets.xcassets */; };
+		4607150722863E390083E484 /* SDWebImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4607150622863E390083E484 /* SDWebImage.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +23,7 @@
 		19DDE5C6A148D0E3FE11F6C9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.info; path = Info.plist; sourceTree = "<group>"; };
 		19DDE70D7A9522AE12245B32 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		19DDEB4A329D59958E4BDCD2 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		4607150622863E390083E484 /* SDWebImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDWebImage.framework; path = Carthage/Build/iOS/SDWebImage.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,6 +31,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4607150722863E390083E484 /* SDWebImage.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -48,6 +51,7 @@
 			children = (
 				19DDE385AB38B19B2F70AFC9 /* Products */,
 				19DDEE855C5176A1A02D35CB /* Carthage-Test */,
+				4607150522863E390083E484 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -64,6 +68,14 @@
 			path = "Carthage-Test";
 			sourceTree = "<group>";
 		};
+		4607150522863E390083E484 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				4607150622863E390083E484 /* SDWebImage.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -74,6 +86,7 @@
 				19DDE96519916DF587358497 /* Sources */,
 				19DDE9DCD122F83CB23C5625 /* Frameworks */,
 				19DDEC7BD4B61CD574AF4AD9 /* Resources */,
+				460715082286403F0083E484 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -124,6 +137,28 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		460715082286403F0083E484 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/SDWebImage.framework",
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/SDWebImage.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n/usr/local/bin/carthage copy-frameworks\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		19DDE96519916DF587358497 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -160,6 +195,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = "Carthage-Test/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.kat8n.Carthage-Test";
@@ -288,6 +327,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = "Carthage-Test/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.kat8n.Carthage-Test";

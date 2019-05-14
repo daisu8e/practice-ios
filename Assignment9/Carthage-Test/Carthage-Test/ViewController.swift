@@ -1,21 +1,10 @@
-//
-//  ViewController.swift
-//  Carthage-Test
-//
-//  Created by Daisuke Katsumata on 2019-05-10.
-//  Copyright © 2019 kat8n. All rights reserved.
-//
-
 import UIKit
-
+import SDWebImage
 
 class ViewController: UIViewController {
 
-    override func viewDidLoad() {
+  override func viewDidLoad() {
     super.viewDidLoad()
-    // Do any additional setup after loading the view.
-    }
-
-
+  }
 
 }
