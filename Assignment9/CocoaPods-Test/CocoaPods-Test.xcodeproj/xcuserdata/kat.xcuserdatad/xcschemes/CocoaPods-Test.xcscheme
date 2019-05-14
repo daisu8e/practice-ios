@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Scheme
+   version = "1.3">
+   <BuildAction>
+      <BuildActionEntries>
+         <BuildActionEntry
+            buildForRunning = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "19DDEA9E88FE6E7A38A3C4A1"
+               BuildableName = "CocoaPods-Test.app"
+               BlueprintName = "CocoaPods-Test"
+               ReferencedContainer = "container:CocoaPods-Test.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+      </BuildActionEntries>
+   </BuildAction>
+   <LaunchAction
+      useCustomWorkingDirectory = "NO"
+      buildConfiguration = "Debug"
+      allowLocationSimulation = "YES">
+      <BuildableProductRunnable>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "19DDEA9E88FE6E7A38A3C4A1"
+            BuildableName = "CocoaPods-Test.app"
+            BlueprintName = "CocoaPods-Test"
+            ReferencedContainer = "container:CocoaPods-Test.xcodeproj">
+         </BuildableReference>
+      </BuildableProductRunnable>
+   </LaunchAction>
+</Scheme>
